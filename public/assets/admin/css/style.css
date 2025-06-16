@@ -1,0 +1,98 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+#content {
+    width: 100%;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+.sidebar-header {
+    background-color: #343a40;
+}
+
+.sidebar-header h4 {
+    color: #fff;
+    font-weight: 700;
+}
+
+.sidebar-header p {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.85rem;
+}
+
+.components {
+    padding: 20px 0;
+}
+
+.components li a {
+    padding: 10px 15px;
+    display: block;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.components li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.components li.active > a {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.components .collapse a {
+    padding: 10px 15px 10px 30px;
+    font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+}
+
+.navbar {
+    padding: 15px 10px;
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+.img-thumbnail {
+    padding: 0.25rem;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    max-width: 100%;
+    height: auto;
+}
