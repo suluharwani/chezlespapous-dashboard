@@ -42,7 +42,7 @@ $routes->group('admin', ['filter' => 'auth', 'namespace' => 'App\Controllers\Adm
         $routes->get('new', 'Destinations::create');
         $routes->post('store', 'Destinations::store');
         $routes->get('edit/(:num)', 'Destinations::edit/$1');
-        $routes->put('(:num)', 'Destinations::update/$1');
+        $routes->post('update/(:num)', 'Destinations::update/$1');
         $routes->delete('(:num)', 'Destinations::delete/$1');
     });
     
