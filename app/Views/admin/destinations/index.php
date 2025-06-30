@@ -22,14 +22,14 @@
                     <?= $title ?>
                 </div>
                 <div>
-                    <a href="<?= base_url('admin/destinations/create') ?>" class="btn btn-primary btn-sm">
+                    <a href="<?= base_url('admin/destinations/new') ?>" class="btn btn-primary btn-sm">
                         <i class="fas fa-plus"></i> Add New
                     </a>
                 </div>
             </div>
         </div>
         <div class="card-body">
-            <table id="datatablesSimple" class="table table-striped table-bordered">
+            <table id="destinationsTable" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -77,22 +77,27 @@
         </div>
     </div>
 </div>
+<?= $this->endSection() ?>
 
+<?= $this->section('scripts') ?>
 <script>
-function confirmDelete(id, type) {
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = `/admin/${type}/delete/${id}`;
-        }
-    });
-}
+$(document).ready(function() {
+
+    window.confirmDelete = function(id, type) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = `/admin/${type}/delete/${id}`;
+            }
+        });
+    };
+});
 </script>
 <?= $this->endSection() ?>

@@ -20,6 +20,7 @@ class Destinations extends BaseController
         $data = [
             'title' => 'Manage Destinations',
             'destinations' => $this->destinationModel->findAll(),
+            'categories' => ['diving', 'beach', 'island', 'viewpoint', 'cultural'],
             'validation' => $this->validation
         ];
         
@@ -30,6 +31,7 @@ class Destinations extends BaseController
     {
         $data = [
             'title' => 'Add New Destination',
+            'categories' => ['diving', 'beach', 'island', 'viewpoint', 'cultural'],
             'validation' => $this->validation
         ];
         
@@ -38,7 +40,6 @@ class Destinations extends BaseController
     
     public function store()
     {
-        // Validation rules
         $rules = [
             'name' => 'required|min_length[3]|max_length[100]',
             'description' => 'required',
@@ -46,7 +47,7 @@ class Destinations extends BaseController
             'category' => 'required|in_list[diving,beach,island,viewpoint,cultural]',
             'price_range' => 'permit_empty|decimal',
             'best_season' => 'permit_empty|max_length[100]',
-            'image' => 'uploaded[image]|max_size[image,2048]|is_image[image]'
+            'image' => 'uploaded[image]|max_size[image,2048]|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png]'
         ];
         
         if (!$this->validate($rules)) {
@@ -58,7 +59,6 @@ class Destinations extends BaseController
         $imageName = $image->getRandomName();
         $image->move('uploads/destinations', $imageName);
         
-        // Save data
         $this->destinationModel->save([
             'name' => $this->request->getPost('name'),
             'description' => $this->request->getPost('description'),
@@ -77,6 +77,7 @@ class Destinations extends BaseController
         $data = [
             'title' => 'Edit Destination',
             'destination' => $this->destinationModel->find($id),
+            'categories' => ['diving', 'beach', 'island', 'viewpoint', 'cultural'],
             'validation' => $this->validation
         ];
         
@@ -92,7 +93,7 @@ class Destinations extends BaseController
             'category' => 'required|in_list[diving,beach,island,viewpoint,cultural]',
             'price_range' => 'permit_empty|decimal',
             'best_season' => 'permit_empty|max_length[100]',
-            'image' => 'max_size[image,2048]|is_image[image]'
+            'image' => 'max_size[image,2048]|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png]'
         ];
         
         if (!$this->validate($rules)) {

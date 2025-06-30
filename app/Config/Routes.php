@@ -1,79 +1,121 @@
 <?php
 
-use App\Controllers\Admin\Auth;
-use App\Controllers\Admin\Dashboard;
-use App\Controllers\Admin\Destinations;
-use App\Controllers\Admin\DiveSpots;
-use App\Controllers\Admin\Galleries;
-use App\Controllers\Admin\LocalGuides;
-use App\Controllers\Admin\Resorts;
-use App\Controllers\Admin\Sliders;
-use App\Controllers\Admin\Testimonials;
-use App\Controllers\Admin\TourPackages;
+use App\Controllers\Admin\{
+    Auth,
+    Dashboard,
+    Destinations,
+    DiveSpots,
+    Galleries,
+    LocalGuides,
+    Resorts,
+    Sliders,
+    Testimonials,
+    TourPackages
+};
 
-
+// Admin Authentication Routes
 $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function($routes) {
+    // Login/Logout
     $routes->get('login', 'Auth::login');
     $routes->post('login', 'Auth::attemptLogin');
+    $routes->get('logout', 'Auth::logout');
+    
+    // Registration (only when no admin exists)
     $routes->get('register', 'Auth::register');
     $routes->post('register', 'Auth::attemptRegister');
-    $routes->get('logout', 'Auth::logout');
+    
+    // Password Reset
     $routes->get('forgot-password', 'Auth::forgotPassword');
     $routes->post('forgot-password', 'Auth::attemptForgotPassword');
     $routes->get('reset-password/(:any)', 'Auth::resetPassword/$1');
     $routes->post('reset-password/(:any)', 'Auth::attemptResetPassword/$1');
 });
 
-$routes->group('admin', ['filter' => 'auth'], function($routes) {
-    $routes->get('dashboard', [Dashboard::class, 'index']);
-
-        // Destinations
+// Admin Protected Routes (requires authentication)
+$routes->group('admin', ['filter' => 'auth', 'namespace' => 'App\Controllers\Admin'], function($routes) {
+    // Dashboard
+    $routes->get('dashboard', 'Dashboard::index');
+    
+    // Destinations Module
     $routes->group('destinations', function($routes) {
         $routes->get('/', 'Destinations::index');
-        $routes->get('create', 'Destinations::create');
+        $routes->get('new', 'Destinations::create');
         $routes->post('store', 'Destinations::store');
-        $routes->get('edit/(:num)', 'Destinations::edit/$1');
-        $routes->post('update/(:num)', 'Destinations::update/$1');
-        $routes->get('delete/(:num)', 'Destinations::delete/$1');
+        $routes->get('(:num)/edit', 'Destinations::edit/$1');
+        $routes->put('(:num)', 'Destinations::update/$1');
+        $routes->delete('(:num)', 'Destinations::delete/$1');
     });
     
-    // CRUD Routes
-    $routes->group('destinations', function($routes) {
-        $routes->get('/', [Destinations::class, 'index']);
-        $routes->get('new', [Destinations::class, 'new']);
-        $routes->post('create', [Destinations::class, 'create']);
-        $routes->get('edit/(:num)', [Destinations::class, 'edit/$1']);
-        $routes->post('update/(:num)', [Destinations::class, 'update/$1']);
-        $routes->get('delete/(:num)', [Destinations::class, 'delete/$1']);
-    });
-    
-    // Similar routes for other resources (dive_spots, galleries, etc.)
+    // Dive Spots Module
     $routes->group('dive-spots', function($routes) {
-        $routes->get('/', [DiveSpots::class, 'index']);
-        $routes->get('new', [DiveSpots::class, 'new']);
-        $routes->post('create', [DiveSpots::class, 'create']);
-        $routes->get('edit/(:num)', [DiveSpots::class, 'edit/$1']);
-        $routes->post('update/(:num)', [DiveSpots::class, 'update/$1']);
-        $routes->get('delete/(:num)', [DiveSpots::class, 'delete/$1']);
+        $routes->get('/', 'DiveSpots::index');
+        $routes->get('new', 'DiveSpots::create');
+        $routes->post('/', 'DiveSpots::store');
+        $routes->get('(:num)/edit', 'DiveSpots::edit/$1');
+        $routes->put('(:num)', 'DiveSpots::update/$1');
+        $routes->delete('(:num)', 'DiveSpots::delete/$1');
     });
     
+    // Local Guides Module
+    $routes->group('local-guides', function($routes) {
+        $routes->get('/', 'LocalGuides::index');
+        $routes->get('new', 'LocalGuides::create');
+        $routes->post('/', 'LocalGuides::store');
+        $routes->get('(:num)/edit', 'LocalGuides::edit/$1');
+        $routes->put('(:num)', 'LocalGuides::update/$1');
+        $routes->delete('(:num)', 'LocalGuides::delete/$1');
+    });
+    
+    // Resorts Module
+    $routes->group('resorts', function($routes) {
+        $routes->get('/', 'Resorts::index');
+        $routes->get('new', 'Resorts::create');
+        $routes->post('/', 'Resorts::store');
+        $routes->get('(:num)/edit', 'Resorts::edit/$1');
+        $routes->put('(:num)', 'Resorts::update/$1');
+        $routes->delete('(:num)', 'Resorts::delete/$1');
+    });
+    
+    // Tour Packages Module
+    $routes->group('tour-packages', function($routes) {
+        $routes->get('/', 'TourPackages::index');
+        $routes->get('new', 'TourPackages::create');
+        $routes->post('/', 'TourPackages::store');
+        $routes->get('(:num)/edit', 'TourPackages::edit/$1');
+        $routes->put('(:num)', 'TourPackages::update/$1');
+        $routes->delete('(:num)', 'TourPackages::delete/$1');
+    });
+    
+    // Galleries Module
     $routes->group('galleries', function($routes) {
-        $routes->get('/', [Galleries::class, 'index']);
-        $routes->get('new', [Galleries::class, 'new']);
-        $routes->post('create', [Galleries::class, 'create']);
-        $routes->get('edit/(:num)', [Galleries::class, 'edit/$1']);
-        $routes->post('update/(:num)', [Galleries::class, 'update/$1']);
-        $routes->get('delete/(:num)', [Galleries::class, 'delete/$1']);
+        $routes->get('/', 'Galleries::index');
+        $routes->get('new', 'Galleries::create');
+        $routes->post('/', 'Galleries::store');
+        $routes->get('(:num)/edit', 'Galleries::edit/$1');
+        $routes->put('(:num)', 'Galleries::update/$1');
+        $routes->delete('(:num)', 'Galleries::delete/$1');
     });
     
-    // Continue with other resources...
+    // Testimonials Module
+    $routes->group('testimonials', function($routes) {
+        $routes->get('/', 'Testimonials::index');
+        $routes->get('new', 'Testimonials::create');
+        $routes->post('/', 'Testimonials::store');
+        $routes->get('(:num)/edit', 'Testimonials::edit/$1');
+        $routes->put('(:num)', 'Testimonials::update/$1');
+        $routes->delete('(:num)', 'Testimonials::delete/$1');
+    });
+    
+    // Sliders Module
+    $routes->group('sliders', function($routes) {
+        $routes->get('/', 'Sliders::index');
+        $routes->get('new', 'Sliders::create');
+        $routes->post('/', 'Sliders::store');
+        $routes->get('(:num)/edit', 'Sliders::edit/$1');
+        $routes->put('(:num)', 'Sliders::update/$1');
+        $routes->delete('(:num)', 'Sliders::delete/$1');
+    });
 });
 
-// Auth routes
-$routes->group('admin', function($routes) {
-    $routes->get('login', [Auth::class, 'login']);
-    $routes->post('login', [Auth::class, 'attemptLogin']);
-    $routes->get('register', [Auth::class, 'register']);
-    $routes->post('register', [Auth::class, 'attemptRegister']);
-    $routes->get('logout', [Auth::class, 'logout']);
-});
+// Frontend Routes (if needed)
+$routes->get('/', 'Home::index');

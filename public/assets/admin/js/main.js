@@ -43,13 +43,18 @@ function confirmDelete(id, type) {
 }
 // Initialize DataTables
 $(document).ready(function() {
-    $('.table').DataTable({
-        responsive: true,
-        columnDefs: [
-            { orderable: false, targets: -1 } // Disable sorting for action column
-        ]
-    });
-    
+    // Initialize DataTables only once
+    if (!$.fn.DataTable.isDataTable('#datatablesSimple')) {
+        $('#datatablesSimple').DataTable({
+            responsive: true,
+            columnDefs: [
+                { orderable: false, targets: -1 } // Disable sorting for action column
+            ],
+            initComplete: function() {
+                // Add custom filtering if needed
+            }
+        });
+    }
     // Confirm before delete
     window.confirmDelete = function(id, type) {
         Swal.fire({
