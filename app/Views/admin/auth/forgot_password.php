@@ -7,24 +7,13 @@
             <div class="card-header">
                 <h3 class="text-center font-weight-light my-4">
                     <img src="<?= base_url('assets/admin/img/logo.png') ?>" alt="Logo" height="40">
-                    <span class="d-block mt-2">Admin Login</span>
+                    <span class="d-block mt-2">Forgot Password</span>
                 </h3>
             </div>
             <div class="card-body">
                 <?php if (session()->getFlashdata('error')): ?>
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <?= session()->getFlashdata('error') ?>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                <?php endif ?>
-                
-                <?php if (session()->getFlashdata('errors')): ?>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <ul class="mb-0">
-                            <?php foreach (session()->getFlashdata('errors') as $error): ?>
-                                <li><?= $error ?></li>
-                            <?php endforeach ?>
-                        </ul>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 <?php endif ?>
@@ -36,35 +25,28 @@
                     </div>
                 <?php endif ?>
                 
-                <form action="<?= base_url('admin/login') ?>" method="post">
+                <div class="small mb-3 text-muted">
+                    Enter your email address and we will send you a link to reset your password.
+                </div>
+                
+                <form action="<?= base_url('admin/forgot-password') ?>" method="post">
                     <?= csrf_field() ?>
                     
                     <div class="form-floating mb-3">
                         <input class="form-control" id="email" name="email" type="email" 
-                               placeholder="name@example.com" value="<?= old('email') ?>" required />
+                               placeholder="name@example.com" required />
                         <label for="email">Email address</label>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input class="form-control" id="password" name="password" type="password" 
-                               placeholder="Password" required />
-                        <label for="password">Password</label>
-                    </div>
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" id="remember" name="remember" type="checkbox" value="1" />
-                        <label class="form-check-label" for="remember">Remember Password</label>
-                    </div>
                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                        <a class="small" href="<?= base_url('admin/forgot-password') ?>">Forgot Password?</a>
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        <a class="small" href="<?= base_url('admin/login') ?>">Return to login</a>
+                        <button type="submit" class="btn btn-primary">Reset Password</button>
                     </div>
                 </form>
             </div>
             <div class="card-footer text-center py-3">
-                <?php if ($showRegisterLink): ?>
-                    <div class="small">
-                        <a href="<?= base_url('admin/register') ?>">Need an account? Sign up!</a>
-                    </div>
-                <?php endif ?>
+                <div class="small">
+                    <a href="<?= base_url('admin/register') ?>">Need an account? Sign up!</a>
+                </div>
             </div>
         </div>
     </div>

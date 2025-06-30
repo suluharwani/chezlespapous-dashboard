@@ -1,68 +1,96 @@
-<?= $this->extend('admin/layouts/main') ?>
+<?= $this->extend('admin/layout') ?>
 
 <?= $this->section('content') ?>
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Manage Destinations</h1>
-    <div class="btn-toolbar mb-2 mb-md-0">
-        <a href="<?= base_url('admin/destinations/new') ?>" class="btn btn-sm btn-outline-primary">
-            <i class="bi bi-plus-circle"></i> Add New Destination
-        </a>
+<div class="container-fluid px-4">
+    <h1 class="mt-4"><?= $title ?></h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active"><?= $title ?></li>
+    </ol>
+    
+    <?php if (session()->getFlashdata('success')): ?>
+        <div class="alert alert-success alert-dismissible fade show">
+            <?= session()->getFlashdata('success') ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif ?>
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <i class="fas fa-table me-1"></i>
+                    <?= $title ?>
+                </div>
+                <div>
+                    <a href="<?= base_url('admin/destinations/create') ?>" class="btn btn-primary btn-sm">
+                        <i class="fas fa-plus"></i> Add New
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($destinations as $index => $destination): ?>
+                    <tr>
+                        <td><?= $index + 1 ?></td>
+                        <td>
+                            <img src="<?= base_url($destination['image_url']) ?>" alt="<?= $destination['name'] ?>" 
+                                 class="img-thumbnail" style="width: 80px; height: 60px; object-fit: cover;">
+                        </td>
+                        <td><?= $destination['name'] ?></td>
+                        <td><?= $destination['location'] ?></td>
+                        <td>
+                            <span class="badge bg-<?= 
+                                $destination['category'] == 'diving' ? 'primary' : 
+                                ($destination['category'] == 'beach' ? 'info' : 
+                                ($destination['category'] == 'island' ? 'success' : 
+                                ($destination['category'] == 'viewpoint' ? 'warning' : 'secondary')))
+                            ?>">
+                                <?= ucfirst($destination['category']) ?>
+                            </span>
+                        </td>
+                        <td><?= $destination['price_range'] ? 'Rp' . number_format($destination['price_range'], 2) : 'Free' ?></td>
+                        <td>
+                            <a href="<?= base_url('admin/destinations/edit/' . $destination['id']) ?>" class="btn btn-sm btn-warning">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <button onclick="confirmDelete('<?= $destination['id'] ?>', 'destinations')" class="btn btn-sm btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <?php endforeach ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
-<div class="table-responsive">
-    <table class="table table-striped table-hover">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Location</th>
-                <th>Category</th>
-                <th>Price Range</th>
-                <th>Best Season</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($destinations as $index => $destination): ?>
-            <tr>
-                <td><?= $index + 1 ?></td>
-                <td>
-                    <img src="<?= base_url('assets/admin/uploads/destinations/' . $destination['image_url']) ?>" alt="<?= $destination['name'] ?>" class="img-thumbnail" style="width: 80px; height: 60px; object-fit: cover;">
-                </td>
-                <td><?= $destination['name'] ?></td>
-                <td><?= $destination['location'] ?></td>
-                <td><?= ucfirst($destination['category']) ?></td>
-                <td><?= $destination['price_range'] ? 'Rp' . number_format($destination['price_range'], 2) : '-' ?></td>
-                <td><?= $destination['best_season'] ?: '-' ?></td>
-                <td>
-                    <a href="<?= base_url('admin/destinations/' . $destination['id'] . '/edit') ?>" class="btn btn-sm btn-outline-primary">
-                        <i class="bi bi-pencil"></i>
-                    </a>
-                    <button class="btn btn-sm btn-outline-danger" onclick="confirmDelete(<?= $destination['id'] ?>)">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-</div>
-
 <script>
-function confirmDelete(id) {
+function confirmDelete(id, type) {
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = "<?= base_url('admin/destinations') ?>/" + id + "/delete";
+            window.location.href = `/admin/${type}/delete/${id}`;
         }
     });
 }

@@ -6,6 +6,11 @@ use CodeIgniter\Config\BaseConfig;
 
 class App extends BaseConfig
 {
+    public $CSRFTokenName = 'csrf_token_name';
+public $CSRFRandomize = true;
+public $CSRFExpire = 7200; // 2 hours
+public $CSRFRegenerate = true;
+public $CSRFRedirect = false;
     /**
      * --------------------------------------------------------------------------
      * Base Site URL
@@ -199,4 +204,11 @@ class App extends BaseConfig
      * @see http://www.w3.org/TR/CSP/
      */
     public bool $CSPEnabled = false;
+    public $throttle = [
+    'login' => [
+        'enabled' => true,
+        'limit' => 5,
+        'time' => 300 // 5 minutes
+    ]
+];
 }
