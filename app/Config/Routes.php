@@ -43,7 +43,7 @@ $routes->group('admin', ['filter' => 'auth', 'namespace' => 'App\Controllers\Adm
         $routes->post('store', 'Destinations::store');
         $routes->get('edit/(:num)', 'Destinations::edit/$1');
         $routes->post('update/(:num)', 'Destinations::update/$1');
-        $routes->delete('(:num)', 'Destinations::delete/$1');
+        $routes->get('delete/(:num)', 'Destinations::delete/$1');
     });
     
     // Dive Spots Module

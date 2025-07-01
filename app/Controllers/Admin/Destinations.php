@@ -141,4 +141,5 @@ class Destinations extends BaseController
         
         return redirect()->to('/admin/destinations')->with('success', 'Destination deleted successfully');
     }
+    
 }

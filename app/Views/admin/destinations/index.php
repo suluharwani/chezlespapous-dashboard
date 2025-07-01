@@ -66,14 +66,34 @@
                             <a href="<?= base_url('admin/destinations/edit/' . $destination['id']) ?>" class="btn btn-sm btn-warning">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <button onclick="confirmDelete('<?= $destination['id'] ?>', 'destinations')" class="btn btn-sm btn-danger">
-                                <i class="fas fa-trash"></i>
-                            </button>
+                             <button class="btn btn-sm btn-danger delete-btn" 
+                                data-id="<?= $destination['id'] ?>"
+                                data-name="<?= esc($destination['name']) ?>">
+                            <i class="fas fa-trash"></i>
+                        </button>
                         </td>
                     </tr>
                     <?php endforeach ?>
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete the destination: <strong id="destinationName"></strong>?</p>
+                <p class="text-danger"><strong>This action cannot be undone!</strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <a href="#" id="confirmDelete" class="btn btn-danger">Delete Destination</a>
+            </div>
         </div>
     </div>
 </div>
@@ -98,6 +118,21 @@ $(document).ready(function() {
             }
         });
     };
+
+    
+    // Delete button click handler
+    $('.delete-btn').click(function() {
+        const id = $(this).data('id');
+        const name = $(this).data('name');
+        
+        // Set modal content
+        $('#destinationName').text(name);
+        $('#confirmDelete').attr('href', '<?= base_url('admin/destinations/delete/') ?>' + id);
+        
+        // Show modal
+        $('#deleteModal').modal('show');
+    });
 });
+
 </script>
 <?= $this->endSection() ?>
