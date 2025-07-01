@@ -35,6 +35,9 @@
                         <a class="nav-link" href="<?= base_url('admin/dashboard') ?>">
                             <i class="fas fa-tachometer-alt me-1"></i> Dashboard
                         </a>
+                        <a class="nav-link" href="https://chezlespapous.com/">
+                            <i class="fas fa-tachometer-alt me-1"></i> Website
+                        </a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
