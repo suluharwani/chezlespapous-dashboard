@@ -49,8 +49,8 @@ $routes->group('admin', ['filter' => 'auth', 'namespace' => 'App\Controllers\Adm
     // Dive Spots Module
     $routes->group('dive-spots', function($routes) {
         $routes->get('/', 'DiveSpots::index');
-        $routes->get('new', 'DiveSpots::create');
-        $routes->post('/', 'DiveSpots::store');
+        $routes->get('new', 'DiveSpots::new');
+        $routes->post('store', 'DiveSpots::create');
         $routes->get('(:num)/edit', 'DiveSpots::edit/$1');
         $routes->put('(:num)', 'DiveSpots::update/$1');
         $routes->delete('(:num)', 'DiveSpots::delete/$1');
