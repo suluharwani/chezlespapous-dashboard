@@ -74,7 +74,7 @@
                     
                     <?php if ($destination['image_url']): ?>
                         <div class="mt-2">
-                            <img src="<?= base_url($destination['image_url']) ?>" alt="Current Image" class="img-thumbnail" style="max-height: 200px;">
+                            <img src="<?= $destination['image_url'] ?>" alt="Current Image" class="img-thumbnail" style="max-height: 200px;">
                             <p class="text-muted mt-1">Current Image</p>
                         </div>
                     <?php endif ?>
