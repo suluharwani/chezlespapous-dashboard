@@ -46,7 +46,7 @@
                     <tr>
                         <td><?= $index + 1 ?></td>
                         <td>
-                            <img src="<?= base_url($destination['image_url']) ?>" alt="<?= $destination['name'] ?>" 
+                            <img src="<?= $destination['image_url'] ?>" alt="<?= $destination['name'] ?>" 
                                  class="img-thumbnail" style="width: 80px; height: 60px; object-fit: cover;">
                         </td>
                         <td><?= $destination['name'] ?></td>

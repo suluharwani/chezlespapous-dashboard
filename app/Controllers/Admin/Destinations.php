@@ -66,7 +66,7 @@ class Destinations extends BaseController
             'category' => $this->request->getPost('category'),
             'price_range' => $this->request->getPost('price_range'),
             'best_season' => $this->request->getPost('best_season'),
-            'image_url' => 'uploads/destinations/' . $imageName
+            'image_url' => base_url().'uploads/destinations/' . $imageName
         ]);
         
         return redirect()->to('/admin/destinations')->with('success', 'Destination added successfully');
@@ -120,7 +120,7 @@ class Destinations extends BaseController
             // Upload new image
             $imageName = $image->getRandomName();
             $image->move('uploads/destinations', $imageName);
-            $data['image_url'] = 'uploads/destinations/' . $imageName;
+            $data['image_url'] = base_url().'uploads/destinations/' . $imageName;
         }
         
         $this->destinationModel->update($id, $data);
