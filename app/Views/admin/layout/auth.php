@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title><?= $title ?? 'Authentication' ?> - Raja Ampat Admin</title>
+    <title><?= $title ?? 'Authentication' ?> </title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -63,7 +63,7 @@
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Raja Ampat Tourism <?= date('Y') ?></div>
+                        <div class="text-muted">Copyright &copy;  <?= date('Y') ?></div>
                         <div>
                             <a href="#">Privacy Policy</a>
                             &middot;
