@@ -45,8 +45,10 @@ class LocalGuides extends BaseController
             'specialization' => 'required|in_list[diving,snorkeling,photography,cultural,adventure]',
             'price_per_day' => 'required|decimal',
             'years_experience' => 'required|numeric',
-            'photo' => 'uploaded[photo]|max_size[photo,2048]|is_image[photo]'
+            'photo' => 'uploaded[photo]|is_image[photo]'
         ])) {
+            
+
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
         
@@ -90,7 +92,7 @@ class LocalGuides extends BaseController
         
         $rules = [
             'full_name' => 'required|min_length[3]|max_length[100]',
-            'email' => "required|valid_email|is_unique[local_guides.email,id,{$id}]",
+            'email' => "required",
             'phone' => 'required|max_length[20]',
             'address' => 'required',
             'experience' => 'required',

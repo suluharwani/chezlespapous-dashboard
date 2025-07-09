@@ -28,7 +28,7 @@
                         <a href="<?= base_url('admin/destinations') ?>" class="btn btn-sm btn-primary me-1">
                             <i class="fas fa-list"></i> View All
                         </a>
-                        <a href="<?= base_url('admin/destinations/create') ?>" class="btn btn-sm btn-success">
+                        <a href="<?= base_url('admin/destinations/new') ?>" class="btn btn-sm btn-success">
                             <i class="fas fa-plus"></i> Add New
                         </a>
                     </div>
@@ -55,7 +55,7 @@
                         <a href="<?= base_url('admin/dive-spots') ?>" class="btn btn-sm btn-info me-1">
                             <i class="fas fa-list"></i> View All
                         </a>
-                        <a href="<?= base_url('admin/dive-spots/create') ?>" class="btn btn-sm btn-success">
+                        <a href="<?= base_url('admin/dive-spots/new') ?>" class="btn btn-sm btn-success">
                             <i class="fas fa-plus"></i> Add New
                         </a>
                     </div>

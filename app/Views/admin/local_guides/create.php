@@ -8,8 +8,12 @@
         <li class="breadcrumb-item active"><?= $title ?></li>
     </ol>
     
-    <?php if (isset($validation)): ?>
-        <div class="alert alert-danger"><?= $validation->listErrors() ?></div>
+<?php if (session('errors')): ?>
+        <div class="alert alert-danger">
+            <?php foreach (session('errors') as $error): ?>
+                <p><?= $error ?></p>
+            <?php endforeach ?>
+        </div>
     <?php endif ?>
     
     <div class="card mb-4">

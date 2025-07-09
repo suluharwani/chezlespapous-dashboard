@@ -16,14 +16,25 @@ class SliderModel extends Model
     
     protected $validationRules = [
         'title' => 'required|min_length[3]|max_length[100]',
-        'image_url' => 'required',
+        'subtitle' => 'permit_empty|max_length[255]',
+        'button_text' => 'permit_empty|max_length[50]',
+        'button_link' => 'permit_empty|valid_url',
+        'image' => 'uploaded[image]|max_size[image,2048]|is_image[image]',
         'display_order' => 'permit_empty|integer'
     ];
-    
+
     public function getActiveSliders()
     {
         return $this->where('is_active', 1)
                    ->orderBy('display_order', 'ASC')
                    ->findAll();
+    }
+
+    public function getMaxDisplayOrder()
+    {
+        return $this->selectMax('display_order')
+                   ->get()
+                   ->getRow()
+                   ->display_order ?? 0;
     }
 }

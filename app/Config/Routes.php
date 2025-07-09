@@ -51,69 +51,70 @@ $routes->group('admin', ['filter' => 'auth', 'namespace' => 'App\Controllers\Adm
         $routes->get('/', 'DiveSpots::index');
         $routes->get('new', 'DiveSpots::new');
         $routes->post('store', 'DiveSpots::create');
-        $routes->get('(:num)/edit', 'DiveSpots::edit/$1');
-        $routes->put('(:num)', 'DiveSpots::update/$1');
-        $routes->delete('(:num)', 'DiveSpots::delete/$1');
+        $routes->get('edit/(:num)', 'DiveSpots::edit/$1');
+        $routes->post('update/(:num)', 'DiveSpots::update/$1');
+        $routes->get('delete/(:num)', 'DiveSpots::delete/$1');
     });
     
     // Local Guides Module
     $routes->group('local-guides', function($routes) {
         $routes->get('/', 'LocalGuides::index');
-        $routes->get('new', 'LocalGuides::create');
+        $routes->get('new', 'LocalGuides::new');
+        $routes->post('create', 'LocalGuides::create');
         $routes->post('/', 'LocalGuides::store');
-        $routes->get('(:num)/edit', 'LocalGuides::edit/$1');
-        $routes->put('(:num)', 'LocalGuides::update/$1');
+        $routes->get('edit/(:num)', 'LocalGuides::edit/$1');
+        $routes->post('update/(:num)', 'LocalGuides::update/$1');
         $routes->delete('(:num)', 'LocalGuides::delete/$1');
     });
     
     // Resorts Module
-    $routes->group('resorts', function($routes) {
+     $routes->group('resorts', function($routes) {
         $routes->get('/', 'Resorts::index');
-        $routes->get('new', 'Resorts::create');
-        $routes->post('/', 'Resorts::store');
-        $routes->get('(:num)/edit', 'Resorts::edit/$1');
-        $routes->put('(:num)', 'Resorts::update/$1');
-        $routes->delete('(:num)', 'Resorts::delete/$1');
+        $routes->get('new', 'Resorts::new');
+        $routes->post('store', 'Resorts::create');
+        $routes->get('edit/(:num)', 'Resorts::edit/$1');
+        $routes->post('update/(:num)', 'Resorts::update/$1');
+        $routes->get('delete/(:num)', 'Resorts::delete/$1');
     });
     
     // Tour Packages Module
-    $routes->group('tour-packages', function($routes) {
+ $routes->group('tour-packages', function($routes) {
         $routes->get('/', 'TourPackages::index');
-        $routes->get('new', 'TourPackages::create');
-        $routes->post('/', 'TourPackages::store');
-        $routes->get('(:num)/edit', 'TourPackages::edit/$1');
-        $routes->put('(:num)', 'TourPackages::update/$1');
-        $routes->delete('(:num)', 'TourPackages::delete/$1');
+        $routes->get('new', 'TourPackages::new');
+        $routes->post('store', 'TourPackages::create');
+        $routes->get('edit/(:num)', 'TourPackages::edit/$1');
+        $routes->post('update/(:num)', 'TourPackages::update/$1');
+        $routes->get('delete/(:num)', 'TourPackages::delete/$1');
     });
     
     // Galleries Module
-    $routes->group('galleries', function($routes) {
+ $routes->group('galleries', function($routes) {
         $routes->get('/', 'Galleries::index');
-        $routes->get('new', 'Galleries::create');
-        $routes->post('/', 'Galleries::store');
-        $routes->get('(:num)/edit', 'Galleries::edit/$1');
-        $routes->put('(:num)', 'Galleries::update/$1');
-        $routes->delete('(:num)', 'Galleries::delete/$1');
+        $routes->get('new', 'Galleries::new');
+        $routes->post('store', 'Galleries::create');
+        $routes->get('edit/(:num)', 'Galleries::edit/$1');
+        $routes->post('update/(:num)', 'Galleries::update/$1');
+        $routes->get('delete/(:num)', 'Galleries::delete/$1');
     });
-    
     // Testimonials Module
-    $routes->group('testimonials', function($routes) {
+$routes->group('testimonials', function($routes) {
         $routes->get('/', 'Testimonials::index');
-        $routes->get('new', 'Testimonials::create');
-        $routes->post('/', 'Testimonials::store');
-        $routes->get('(:num)/edit', 'Testimonials::edit/$1');
-        $routes->put('(:num)', 'Testimonials::update/$1');
-        $routes->delete('(:num)', 'Testimonials::delete/$1');
+        $routes->get('new', 'Testimonials::new');
+        $routes->post('store', 'Testimonials::create');
+        $routes->get('edit/(:num)', 'Testimonials::edit/$1');
+        $routes->post('update/(:num)', 'Testimonials::update/$1');
+        $routes->get('delete/(:num)', 'Testimonials::delete/$1');
     });
     
     // Sliders Module
     $routes->group('sliders', function($routes) {
         $routes->get('/', 'Sliders::index');
-        $routes->get('new', 'Sliders::create');
-        $routes->post('/', 'Sliders::store');
-        $routes->get('(:num)/edit', 'Sliders::edit/$1');
-        $routes->put('(:num)', 'Sliders::update/$1');
-        $routes->delete('(:num)', 'Sliders::delete/$1');
+        $routes->get('new', 'Sliders::new');
+        $routes->post('store', 'Sliders::create');
+        $routes->get('edit/(:num)', 'Sliders::edit/$1');
+        $routes->post('update/(:num)', 'Sliders::update/$1');
+        $routes->get('delete/(:num)', 'Sliders::delete/$1');
+        $routes->post('update-order', 'Sliders::updateOrder');
     });
 });
 

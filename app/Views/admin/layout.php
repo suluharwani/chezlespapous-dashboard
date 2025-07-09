@@ -26,7 +26,7 @@
     <!-- Top Navigation Bar (Simplified) -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="<?= base_url('admin') ?>">
+            <a class="navbar-brand" href="<?= base_url('admin/dashboard') ?>">
                 <i class="fas fa-map-marked-alt me-2"></i>Chezlespapous Admin
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
