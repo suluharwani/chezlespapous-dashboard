@@ -65,7 +65,7 @@
     <div class="welcome-container">
         <div class="welcome-card">
             <div class="welcome-header">
-                <img src="<?= base_url('assets/img/logo-white.png') ?>" alt="Chezlespapous Logo" class="logo">
+                <img src="<?= base_url('assets/admin/img/logo.png') ?>" alt="Logo" height="190">
                 <h2>Admin Portal</h2>
                 <p class="mb-0">Selamat datang di sistem administrasi</p>
             </div>
