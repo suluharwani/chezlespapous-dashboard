@@ -19,7 +19,6 @@ class GalleryModel extends Model
         'description' => 'permit_empty|max_length[500]',
         'category' => 'required|in_list[nature,diving,culture,resort]',
         'location' => 'permit_empty|max_length[100]',
-        'image' => 'uploaded[image]|max_size[image,2048]|is_image[image]'
     ];
     
     protected $beforeInsert = ['generateSlug'];

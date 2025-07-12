@@ -82,7 +82,7 @@
                         <a href="<?= base_url('admin/local-guides') ?>" class="btn btn-sm btn-success me-1">
                             <i class="fas fa-list"></i> View All
                         </a>
-                        <a href="<?= base_url('admin/local-guides/create') ?>" class="btn btn-sm btn-success">
+                        <a href="<?= base_url('admin/local-guides/new') ?>" class="btn btn-sm btn-success">
                             <i class="fas fa-plus"></i> Add New
                         </a>
                     </div>
@@ -109,7 +109,7 @@
                         <a href="<?= base_url('admin/resorts') ?>" class="btn btn-sm btn-warning me-1">
                             <i class="fas fa-list"></i> View All
                         </a>
-                        <a href="<?= base_url('admin/resorts/create') ?>" class="btn btn-sm btn-success">
+                        <a href="<?= base_url('admin/resorts/new') ?>" class="btn btn-sm btn-success">
                             <i class="fas fa-plus"></i> Add New
                         </a>
                     </div>
@@ -139,7 +139,7 @@
                         <a href="<?= base_url('admin/tour-packages') ?>" class="btn btn-sm btn-danger me-1">
                             <i class="fas fa-list"></i> View All
                         </a>
-                        <a href="<?= base_url('admin/tour-packages/create') ?>" class="btn btn-sm btn-success">
+                        <a href="<?= base_url('admin/tour-packages/new') ?>" class="btn btn-sm btn-success">
                             <i class="fas fa-plus"></i> Add New
                         </a>
                     </div>
@@ -166,7 +166,7 @@
                         <a href="<?= base_url('admin/galleries') ?>" class="btn btn-sm btn-secondary me-1">
                             <i class="fas fa-list"></i> View All
                         </a>
-                        <a href="<?= base_url('admin/galleries/create') ?>" class="btn btn-sm btn-success">
+                        <a href="<?= base_url('admin/galleries/new') ?>" class="btn btn-sm btn-success">
                             <i class="fas fa-plus"></i> Add New
                         </a>
                     </div>
@@ -193,7 +193,7 @@
                         <a href="<?= base_url('admin/testimonials') ?>" class="btn btn-sm btn-dark me-1">
                             <i class="fas fa-list"></i> View All
                         </a>
-                        <a href="<?= base_url('admin/testimonials/create') ?>" class="btn btn-sm btn-success">
+                        <a href="<?= base_url('admin/testimonials/new') ?>" class="btn btn-sm btn-success">
                             <i class="fas fa-plus"></i> Add New
                         </a>
                     </div>
@@ -220,7 +220,7 @@
                         <a href="<?= base_url('admin/sliders') ?>" class="btn btn-sm btn-info me-1">
                             <i class="fas fa-list"></i> View All
                         </a>
-                        <a href="<?= base_url('admin/sliders/create') ?>" class="btn btn-sm btn-success">
+                        <a href="<?= base_url('admin/sliders/new') ?>" class="btn btn-sm btn-success">
                             <i class="fas fa-plus"></i> Add New
                         </a>
                     </div>

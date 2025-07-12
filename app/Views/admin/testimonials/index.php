@@ -47,7 +47,7 @@
                     <tr>
                         <td><?= $index + 1 ?></td>
                         <td>
-                            <img src="<?= base_url($testimonial['photo_url']) ?>" alt="<?= esc($testimonial['visitor_name']) ?>" 
+                            <img src="<?= $testimonial['photo_url'] ?>" alt="<?= esc($testimonial['visitor_name']) ?>" 
                                  class="img-thumbnail rounded-circle" style="width: 60px; height: 60px; object-fit: cover;">
                         </td>
                         <td><?= esc($testimonial['visitor_name']) ?></td>

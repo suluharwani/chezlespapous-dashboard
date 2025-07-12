@@ -8,13 +8,24 @@
         <li class="breadcrumb-item active">Edit</li>
     </ol>
     
-    <?php if (session('errors')): ?>
-        <div class="alert alert-danger">
-            <?php foreach (session('errors') as $error): ?>
-                <p><?= $error ?></p>
-            <?php endforeach ?>
-        </div>
-    <?php endif ?>
+<?php if (session()->has('error')): ?>
+    <div class="alert alert-danger">
+        <i class="fas fa-exclamation-circle"></i> <?= session('error') ?>
+        <?php if (session()->has('errors')): ?>
+            <ul class="mt-2">
+                <?php foreach (session('errors') as $error): ?>
+                    <li><?= $error ?></li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>
+
+<?php if (session()->has('success')): ?>
+    <div class="alert alert-success">
+        <i class="fas fa-check-circle"></i> <?= session('success') ?>
+    </div>
+<?php endif; ?>
     
     <div class="card mb-4">
         <div class="card-header">
@@ -23,7 +34,6 @@
         </div>
         <div class="card-body">
             <form action="<?= base_url('admin/tour-packages/update/' . $package['id']) ?>" method="post" enctype="multipart/form-data">
-                <?= csrf_field() ?>
                 
                 <div class="row mb-3">
                     <div class="col-md-6">
@@ -64,7 +74,7 @@
                         </div>
                     </div>
                 </div>
-
+ 
                 <div class="mb-3">
                     <label for="includes" class="form-label">What's Included*</label>
                     <textarea class="form-control" id="includes" name="includes" rows="2" required><?= old('includes', $package['includes']) ?></textarea>
@@ -84,7 +94,7 @@
                     
                     <?php if ($package['image_url']): ?>
                         <div class="mt-2">
-                            <img src="<?= base_url($package['image_url']) ?>" alt="Current Image" class="img-thumbnail" style="max-height: 200px;">
+                            <img src="<?= $package['image_url'] ?>" alt="Current Image" class="img-thumbnail" style="max-height: 200px;">
                             <p class="text-muted mt-1">Current Image</p>
                         </div>
                     <?php endif ?>

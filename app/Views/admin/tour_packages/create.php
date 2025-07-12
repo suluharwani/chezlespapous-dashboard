@@ -8,13 +8,26 @@
         <li class="breadcrumb-item active">New</li>
     </ol>
     
-    <?php if (session('errors')): ?>
-        <div class="alert alert-danger">
+<?php if (session()->has('error')): ?>
+    <div class="alert alert-danger">
+        <i class="fas fa-exclamation-circle"></i> <?= session('error') ?>
+        <?php if (config('CI_ENVIRONMENT') !== 'production' && session()->has('debug_error')): ?>
+            <div class="mt-2 p-2 bg-light">
+                <small>Debug info: <?= session('debug_error') ?></small>
+            </div>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>
+
+<?php if (session()->has('errors')): ?>
+    <div class="alert alert-danger">
+        <ul class="mb-0">
             <?php foreach (session('errors') as $error): ?>
-                <p><?= $error ?></p>
-            <?php endforeach ?>
-        </div>
-    <?php endif ?>
+                <li><?= $error ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
     
     <div class="card mb-4">
         <div class="card-header">

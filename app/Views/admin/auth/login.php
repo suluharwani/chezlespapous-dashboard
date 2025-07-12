@@ -6,7 +6,7 @@
         <div class="card shadow-lg border-0 rounded-lg mt-5">
             <div class="card-header">
                 <h3 class="text-center font-weight-light my-4">
-                    <img src="<?= base_url('assets/admin/img/logo.png') ?>" alt="Logo" height="40">
+                    <img src="<?= base_url('assets/admin/img/logo.png') ?>" alt="Logo" height="190">
                     <span class="d-block mt-2">Admin Login</span>
                 </h3>
             </div>

@@ -20,7 +20,7 @@ class TestimonialModel extends Model
         'testimonial' => 'required|min_length[10]',
         'rating' => 'required|integer|greater_than_equal_to[1]|less_than_equal_to[5]',
         'visit_date' => 'required|valid_date',
-        'photo' => 'uploaded[photo]|max_size[photo,2048]|is_image[photo]'
+        
     ];
     
     protected $validationMessages = [

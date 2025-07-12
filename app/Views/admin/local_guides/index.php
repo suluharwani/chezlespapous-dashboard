@@ -44,7 +44,7 @@
                     <tr>
                         <td><?= $guide['id'] ?></td>
                         <td>
-                            <img src="<?= base_url($guide['photo_url']) ?>" alt="<?= $guide['full_name'] ?>" 
+                            <img src="<?= $guide['photo_url'] ?>" alt="<?= $guide['full_name'] ?>" 
                                  class="img-thumbnail" style="width: 60px; height: 60px; object-fit: cover;">
                         </td>
                         <td><?= $guide['full_name'] ?></td>

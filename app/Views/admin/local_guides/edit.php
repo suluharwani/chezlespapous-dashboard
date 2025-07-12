@@ -8,13 +8,21 @@
         <li class="breadcrumb-item active">Edit</li>
     </ol>
 
-    <?php if (session()->getFlashdata('errors')): ?>
-        <div class="alert alert-danger">
-            <?php foreach (session()->getFlashdata('errors') as $error): ?>
-                <p><?= $error ?></p>
-            <?php endforeach ?>
-        </div>
-    <?php endif ?>
+    <?php if (session()->has('error')): ?>
+    <div class="alert alert-danger">
+        <?= session('error') ?>
+    </div>
+<?php endif; ?>
+
+<?php if (session()->has('errors')): ?>
+    <div class="alert alert-danger">
+        <ul>
+            <?php foreach (session('errors') as $error): ?>
+                <li><?= $error ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
 
     <div class="card mb-4">
         <div class="card-header">
@@ -23,9 +31,7 @@
         </div>
         <div class="card-body">
             <form action="<?= base_url('admin/local-guides/update/' . $guide['id']) ?>" method="post" enctype="multipart/form-data">
-                <?= csrf_field() ?>
-                
-                <div class="row mb-3">
+                <div class="row mb-3"> 
                     <div class="col-md-6">
                         <label for="full_name" class="form-label">Full Name*</label>
                         <input type="text" class="form-control" id="full_name" name="full_name" 
@@ -71,7 +77,7 @@
                     <div class="col-md-6">
                         <label for="price_per_day" class="form-label">Price Per Day (IDR)*</label>
                         <input type="number" class="form-control" id="price_per_day" name="price_per_day" 
-                               value="<?= old('price_per_day', $guide['price_per_day']) ?>" min="0" step="10000" required>
+                               value="<?= old('price_per_day', $guide['price_per_day']) ?>" min="0" required>
                     </div>
                 </div>
 
@@ -111,7 +117,7 @@
                     
                     <?php if ($guide['photo_url']): ?>
                         <div class="mt-2">
-                            <img src="<?= base_url($guide['photo_url']) ?>" alt="Current Photo" class="img-thumbnail" style="max-height: 200px;">
+                            <img src="<?= $guide['photo_url'] ?>" alt="Current Photo" class="img-thumbnail" style="max-height: 200px;">
                             <p class="text-muted mt-1">Current Photo</p>
                         </div>
                     <?php endif ?>

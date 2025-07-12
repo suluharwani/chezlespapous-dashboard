@@ -46,7 +46,7 @@
                     <tr>
                         <td><?= $index + 1 ?></td>
                         <td>
-                            <img src="<?= base_url($package['image_url']) ?>" alt="<?= esc($package['name']) ?>" 
+                            <img src="<?=$package['image_url'] ?>" alt="<?= esc($package['name']) ?>" 
                                  class="img-thumbnail" style="width: 80px; height: 60px; object-fit: cover;">
                         </td>
                         <td><?= esc($package['name']) ?></td>

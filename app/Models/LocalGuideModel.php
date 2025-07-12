@@ -6,7 +6,7 @@ class LocalGuideModel extends Model
 {
     protected $table = 'local_guides';
     protected $primaryKey = 'id';
-    protected $allowedFields = [
+    protected $allowedFields = ['id',
         'full_name', 'email', 'phone', 'address', 'experience', 
         'languages', 'specialization', 'price_per_day', 'photo_url',
         'rating', 'is_verified', 'years_experience'
@@ -17,7 +17,7 @@ class LocalGuideModel extends Model
     
     protected $validationRules = [
         'full_name' => 'required|min_length[3]|max_length[100]',
-        'email' => 'required|valid_email|is_unique[local_guides.email]',
+        'email' => 'required|valid_email',
         'phone' => 'required|max_length[20]',
         'address' => 'required',
         'experience' => 'required',

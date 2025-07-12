@@ -51,7 +51,7 @@
                         </td>
                         <td><?= esc($resort['name']) ?></td>
                         <td><?= esc($resort['location']) ?></td>
-                        <td>Rp <?= number_format((float)$resort['price_range'], 0, ',', '.') ?></td>
+                        <td><?= esc($resort['price_range']) ?></td>
                         <td>
                             <?php if ($resort['is_featured']): ?>
                                 <span class="badge bg-success">Yes</span>

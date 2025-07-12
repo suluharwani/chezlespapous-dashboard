@@ -8,13 +8,21 @@
         <li class="breadcrumb-item active">Edit</li>
     </ol>
 
-    <?php if (session()->getFlashdata('errors')): ?>
-        <div class="alert alert-danger">
-            <?php foreach (session()->getFlashdata('errors') as $error): ?>
-                <p><?= $error ?></p>
-            <?php endforeach ?>
-        </div>
-    <?php endif ?>
+<?php if (session()->has('error')): ?>
+    <div class="alert alert-danger">
+        <?= session('error') ?>
+    </div>
+<?php endif; ?>
+
+<?php if (session()->has('errors')): ?>
+    <div class="alert alert-danger">
+        <ul>
+            <?php foreach (session('errors') as $error): ?>
+                <li><?= $error ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
 
     <div class="card mb-4">
         <div class="card-header">
@@ -46,7 +54,7 @@
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="price_range" class="form-label">Price Range (IDR)*</label>
-                        <input type="number" class="form-control" id="price_range" name="price_range" 
+                        <input type="text" class="form-control" id="price_range" name="price_range" 
                                value="<?= old('price_range', $resort['price_range']) ?>" required>
                     </div>
                     <div class="col-md-4">
@@ -70,7 +78,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="website" class="form-label">Website</label>
-                        <input type="url" class="form-control" id="website" name="website" 
+                        <input type="text" class="form-control" id="website" name="website" 
                                value="<?= old('website', $resort['website']) ?>">
                     </div>
                     <div class="col-md-6">
@@ -91,7 +99,7 @@
                     
                     <?php if ($resort['image_url']): ?>
                         <div class="mt-2">
-                            <img src="<?= base_url($resort['image_url']) ?>" alt="Current Image" class="img-thumbnail" style="max-height: 200px;">
+                            <img src="<?= $resort['image_url'] ?>" alt="Current Image" class="img-thumbnail" style="max-height: 200px;">
                             <p class="text-muted mt-1">Current Image</p>
                         </div>
                     <?php endif ?>

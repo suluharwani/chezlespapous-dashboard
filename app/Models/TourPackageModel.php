@@ -16,13 +16,12 @@ class TourPackageModel extends Model
     protected $updatedField = 'updated_at';
     
     protected $validationRules = [
-        'name' => 'required|min_length[5]|max_length[100]|is_unique[tour_packages.name,id,{id}]',
+        'name' => 'required|min_length[5]|max_length[100]',
         'description' => 'required|min_length[20]',
         'duration' => 'required',
         'price' => 'required|numeric',
         'includes' => 'required',
-        'itinerary' => 'required',
-        'image' => 'uploaded[image]|max_size[image,2048]|is_image[image]'
+        'itinerary' => 'required'
     ];
     
     protected $beforeInsert = ['generateSlug'];

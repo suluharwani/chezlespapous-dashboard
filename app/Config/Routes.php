@@ -64,8 +64,8 @@ $routes->group('admin', ['filter' => 'auth', 'namespace' => 'App\Controllers\Adm
         $routes->post('/', 'LocalGuides::store');
         $routes->get('edit/(:num)', 'LocalGuides::edit/$1');
         $routes->post('update/(:num)', 'LocalGuides::update/$1');
-        $routes->delete('(:num)', 'LocalGuides::delete/$1');
-    });
+        $routes->get('delete/(:num)', 'LocalGuides::delete/$1');
+    }); 
     
     // Resorts Module
      $routes->group('resorts', function($routes) {

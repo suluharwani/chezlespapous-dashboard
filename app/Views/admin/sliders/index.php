@@ -48,7 +48,7 @@
                                 <i class="fas fa-arrows-alt"></i>
                             </td>
                             <td>
-                                <img src="<?= base_url($slider['image_url']) ?>" alt="<?= esc($slider['title']) ?>" 
+                                <img src="<?= $slider['image_url'] ?>" alt="<?= esc($slider['title']) ?>" 
                                      class="img-thumbnail" style="width: 150px; height: 80px; object-fit: cover;">
                             </td>
                             <td><?= esc($slider['title']) ?></td>

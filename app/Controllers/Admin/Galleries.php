@@ -39,32 +39,83 @@ class Galleries extends BaseController
         return view('admin/galleries/create', $data);
     }
     
-    public function create()
-    {
-        if (!$this->validate($this->galleryModel->validationRules)) {
-            return redirect()->back()
-                ->withInput()
-                ->with('errors', $this->validator->getErrors());
+public function create()
+{
+    // Tambahkan validasi untuk file upload
+    $rules = $this->galleryModel->validationRules;
+    $rules['image'] = 'uploaded[image]|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png,image/webp]';
+    
+    if (!$this->validate($rules)) {
+        return redirect()->back()
+            ->withInput()
+            ->with('errors', $this->validator->getErrors());
+    }
+    
+    $image = $this->request->getFile('image');
+    $imageName = null;
+    
+    try {
+        // Validasi tambahan untuk gambar
+        if (!$image->isValid()) {
+            throw new \RuntimeException($image->getErrorString());
         }
         
-        $image = $this->request->getFile('image');
-        $imageName = $image->getRandomName();
-        $image->move('uploads/galleries', $imageName);
+        if ($image->hasMoved()) {
+            throw new \RuntimeException('The file has already been moved.');
+        }
         
-        $this->galleryModel->save([
+        $imageName = $image->getRandomName();
+        if (!$image->move('uploads/galleries', $imageName)) {
+            throw new \RuntimeException('Failed to upload image');
+        }
+        
+        $data = [
             'title' => $this->request->getPost('title'),
             'description' => $this->request->getPost('description'),
             'category' => $this->request->getPost('category'),
             'location' => $this->request->getPost('location'),
-            'image_url' => 'uploads/galleries/' . $imageName,
+            'image_url' => base_url().'uploads/galleries/' . $imageName, // Simpan path relatif saja
             'is_featured' => $this->request->getPost('is_featured') ? 1 : 0,
             'display_order' => $this->request->getPost('display_order') ?? 0
-        ]);
+        ];
+        
+        // Debug data sebelum disimpan
+        // log_message('debug', 'Creating gallery item with data: ' . print_r($data, true));
+        
+        $saveResult = $this->galleryModel->save($data);
+        
+        if (!$saveResult) {
+            $dbError = $this->galleryModel->errors();
+            log_message('error', 'Database error: ' . print_r($dbError, true));
+            throw new \RuntimeException('Failed to save to database');
+        }
         
         return redirect()->to('/admin/galleries')
             ->with('success', 'Gallery item added successfully');
+            
+    } catch (\Exception $e) {
+        // Cleanup: Hapus gambar yang sudah diupload jika ada error
+        if ($imageName && file_exists('uploads/galleries/' . $imageName)) {
+            @unlink('uploads/galleries/' . $imageName);
+        }
+        
+        // Log error untuk debugging
+        log_message('error', 'Error creating gallery item: ' . $e->getMessage());
+        log_message('error', $e->getTraceAsString());
+        
+        // Dapatkan error database jika ada
+        $dbError = $this->galleryModel->errors();
+        $errorMessage = 'Failed to create gallery item: ' . $e->getMessage();
+        
+        if ($dbError) {
+            $errorMessage .= ' | Database error: ' . implode(', ', $dbError);
+        }
+        
+        return redirect()->back()
+            ->withInput()
+            ->with('error', $errorMessage);
     }
-    
+}
     public function edit($id)
     {
         $gallery = $this->galleryModel->find($id);
@@ -119,7 +170,7 @@ class Galleries extends BaseController
             
             $imageName = $image->getRandomName();
             $image->move('uploads/galleries', $imageName);
-            $data['image_url'] = 'uploads/galleries/' . $imageName;
+            $data['image_url'] = base_url().'uploads/galleries/' . $imageName;
         }
         
         $this->galleryModel->update($id, $data);

@@ -16,7 +16,7 @@
     
     <!-- DataTables CSS -->
     <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Custom CSS -->
     <link href="<?= base_url('assets/admin/css/style.css') ?>" rel="stylesheet">
     

@@ -8,13 +8,30 @@
         <li class="breadcrumb-item active">Edit</li>
     </ol>
     
-    <?php if (session('errors')): ?>
-        <div class="alert alert-danger">
+<?php if (session()->has('error')): ?>
+    <div class="alert alert-danger alert-dismissible fade show">
+        <i class="fas fa-exclamation-circle"></i> <?= session('error') ?>
+        <?php if (env('CI_ENVIRONMENT') !== 'production'): ?>
+            <div class="mt-2 small text-muted"><?= session('debug_error') ?? '' ?></div>
+        <?php endif; ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php endif; ?>
+
+<?php if (session()->has('errors')): ?>
+    <div class="alert alert-danger alert-dismissible fade show">
+        <ul class="mb-0">
             <?php foreach (session('errors') as $error): ?>
-                <p><?= $error ?></p>
-            <?php endforeach ?>
-        </div>
-    <?php endif ?>
+                <li><?= $error ?></li>
+            <?php endforeach; ?>
+        </ul>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php endif; ?>
     
     <div class="card mb-4">
         <div class="card-header">
@@ -74,7 +91,7 @@
                     
                     <?php if ($slider['image_url']): ?>
                         <div class="mt-2">
-                            <img src="<?= base_url($slider['image_url']) ?>" alt="Current Image" class="img-thumbnail" style="max-height: 200px;">
+                            <img src="<?=$slider['image_url'] ?>" alt="Current Image" class="img-thumbnail" style="max-height: 200px;">
                             <p class="text-muted mt-1">Current Image</p>
                         </div>
                     <?php endif ?>

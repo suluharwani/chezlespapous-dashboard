@@ -79,7 +79,7 @@
                     
                     <?php if ($gallery['image_url']): ?>
                         <div class="mt-2">
-                            <img src="<?= base_url($gallery['image_url']) ?>" alt="Current Image" class="img-thumbnail" style="max-height: 200px;">
+                            <img src="<?= $gallery['image_url'] ?>" alt="Current Image" class="img-thumbnail" style="max-height: 200px;">
                             <p class="text-muted mt-1">Current Image</p>
                         </div>
                     <?php endif ?>

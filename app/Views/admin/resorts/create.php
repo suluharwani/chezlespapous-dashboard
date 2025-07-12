@@ -46,8 +46,8 @@
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="price_range" class="form-label">Price Range (IDR)*</label>
-                        <input type="number" class="form-control" id="price_range" name="price_range" 
-                               value="<?= old('price_range') ?>" min="0" required>
+                        <input type="text" class="form-control" id="price_range" name="price_range" 
+                               value="<?= old('price_range') ?>"required>
                     </div>
                     <div class="col-md-4">
                         <label for="contact_phone" class="form-label">Contact Phone*</label>

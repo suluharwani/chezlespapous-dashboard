@@ -16,10 +16,10 @@ class ResortModel extends Model
     protected $updatedField = 'updated_at';
     
     protected $validationRules = [
-        'name' => 'required|min_length[3]|max_length[100]|is_unique[resorts.name,id,{id}]',
+        'name' => 'required|min_length[3]|max_length[100]',
         'description' => 'required|min_length[10]',
         'location' => 'required',
-        'price_range' => 'required|numeric',
+        'price_range' => 'required',
         'facilities' => 'required',
         'contact_phone' => 'required',
         'contact_email' => 'required|valid_email',
